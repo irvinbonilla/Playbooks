@@ -1,0 +1,27 @@
+---
+
+- name: source vars for easy-rsa
+  shell: source /etc/openvpn/easy-rsa/vars
+  args:
+    chdir: /etc/openvpn/easy-rsa
+    executable: /bin/bash
+
+
+- name: Build Client
+  shell: ./build-key {{ item }}
+  args:
+    chdir: /etc/openvpn/easy-rsa
+    executable: /bin/bash
+  with_items:
+    - client0
+    - client1
+    - client2
+    - client3
+    - client4
+    - client5
+    - client6
+    - client7
+    - client8
+    - client9
+    - client10
+

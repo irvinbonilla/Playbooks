@@ -6,13 +6,23 @@
     state: present
     
 
-- name: Start service Openvpn, if not running
-  service:
-    name:  openvpn
-    state: started
-
-
 - name: Install easy-rsa
   package:
     name: easy-rsa
     state: present
+
+
+- name: include Configure
+  include: configure.yml
+
+
+- name: Reload daemon
+  systemd:
+    daemon_reload: yes
+
+
+- name: Start service Openvpn, if not running
+  systemd:
+    name:  openvpn
+    state: restarted
+    enabled: yes

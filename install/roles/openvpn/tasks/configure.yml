@@ -60,6 +60,16 @@
     executable: /bin/bash
 
 
+- name: Copy temnplate ipp.txt
+  template:
+    src: ipp.txt.j2
+    dest: /etc/openvpn/ipp.txt
+    owner: root
+    group: root
 
-
-
+- name: Copy temnplate server.conf
+  template:
+    src: server.conf.j2
+    dest: /etc/openvpn/server.conf
+    owner: root
+    group: root
