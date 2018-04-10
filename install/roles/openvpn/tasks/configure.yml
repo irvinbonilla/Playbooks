@@ -1,1 +1,21 @@
 ---
+
+- name: Copy easy-rsa to openvpn path
+  copy:
+    src: /usr/share/easy-rsa
+    dest: /etc/openvpn
+    owner: root
+    group: root
+    mode: 0755
+
+
+- name: Go to the folder easy-rsa in openvpn path
+  command: chdir=/etc/openvpn/easy-rsa
+
+
+- template:
+    src: vars.j2
+    dest: /etc/openvpn/easy-rsa/vars
+    owner: root
+    group: root
+#    mode: 0644
