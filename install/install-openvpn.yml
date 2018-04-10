@@ -1,5 +1,9 @@
 ---
+- name: Install Openvpn
+  user: ansible
+  hosts: all
+  become:  yes 
 
-- include:  TEST
-  debug:
-    msg: "TEST"
+
+  role:
+    - openvpn

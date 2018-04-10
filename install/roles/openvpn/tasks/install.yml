@@ -1,0 +1,13 @@
+---
+
+- name: Install Openvpn
+  package:
+    name: openvpn
+    state: present
+    
+
+- name: Start service Openvpn, if not running
+  service:
+    name:  openvpn
+    state: started
+
