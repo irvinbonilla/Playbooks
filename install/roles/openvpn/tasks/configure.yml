@@ -1,0 +1,75 @@
+---
+
+- name: Copy easy-rsa to openvpn path
+  shell: cp -prv /usr/share/easy-rsa/ /etc/openvpn
+
+
+- name: Copy temnplate vars 
+  template:
+    src: vars.j2
+    dest: /etc/openvpn/easy-rsa/vars
+    owner: root
+    group: root
+#    mode: 0644
+
+
+
+- name: source vars for easy-rsa
+  shell: source /etc/openvpn/easy-rsa/vars
+  args:
+    chdir: /etc/openvpn/easy-rsa
+    executable: /bin/bash
+
+
+- name: Clean all keys
+  shell: ./clean-all
+  args:
+    chdir: /etc/openvpn/easy-rsa
+    executable: /bin/bash
+
+
+- name:  Build ca
+  shell: ./build-ca
+  args:
+    chdir: /etc/openvpn/easy-rsa
+    executable: /bin/bash
+
+- name: Build Key sserver
+  shell: ./build-key-server  server
+  args:
+    chdir: /etc/openvpn/easy-rsa
+    executable: /bin/bash
+
+- name: Build dh
+  shell: ./build-dh
+  args:
+    chdir: /etc/openvpn/easy-rsa
+    executable: /bin/bash
+
+- name:  openvpn genket ta.key
+  shell: openvpn --genkey --secret keys/ta.key
+  args:
+    chdir: /etc/openvpn/easy-rsa
+    executable: /bin/bash
+
+
+- name:  Copy  ca,certs,key,ta,dh to openvpn path
+  shell: cp  ca.crt  ca.key   server.crt server.key  ta.key  dh2048.pem   /etc/openvpn/
+  args:
+    chdir: /etc/openvpn/easy-rsa/keys
+    executable: /bin/bash
+
+
+- name: Copy temnplate ipp.txt
+  template:
+    src: ipp.txt.j2
+    dest: /etc/openvpn/ipp.txt
+    owner: root
+    group: root
+
+- name: Copy temnplate server.conf
+  template:
+    src: server.conf.j2
+    dest: /etc/openvpn/server.conf
+    owner: root
+    group: root
