@@ -5,5 +5,5 @@
   become:  yes 
 
 
-  role:
+  roles:
     - openvpn
