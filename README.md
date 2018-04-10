@@ -1,3 +1,8 @@
 # Playbooks
 
-# for distincts provisioning 
+## for distincts provisioning 
+
+### Install
+
+- openvpn
+- samba
