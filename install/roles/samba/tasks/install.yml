@@ -1,0 +1,29 @@
+---
+
+- name: Install Packages
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - samba
+    - samba-common-bin
+
+
+- name: Include configure
+  include: configure.yml
+
+
+- name: Reload daemon
+  systemd:
+    daemon_reload: yes
+
+
+- name: Start service smbd, nmbd, if not running
+  systemd:
+    name:  '{{ item }}'
+    state: restarted
+    enabled: yes
+  with_items:
+    - smbd
+    - nmbd
+
