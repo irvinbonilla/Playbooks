@@ -2,7 +2,7 @@
 
 - name: Copy easy-rsa to openvpn path
   copy:
-    src: /usr/share/easy-rsa
+    src: /usr/share/easy-rsa/
     dest: /etc/openvpn
     owner: root
     group: root
