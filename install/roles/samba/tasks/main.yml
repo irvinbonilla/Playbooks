@@ -1,5 +1,7 @@
 ---
 
 - include: install.yml
+  when: manage_install_samba
 
 - include: configure-users.yml
+  when: manage_configure_users_samba
