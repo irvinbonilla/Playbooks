@@ -8,7 +8,7 @@
   user:
     name:  '{{ item.name}}'
     comment: '{{ item.name }}'
-#    group: '{{ item.group }}' 
+    group: '{{ item.group }}' 
     groups: '{{ item.groups }}'
     state: '{{ item. state }}'
   with_items:
